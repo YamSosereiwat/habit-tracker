@@ -12,4 +12,24 @@ class Achievement {
     required this.requiredStreakDays,
     this.unlockedAt,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'requiredStreakDays': requiredStreakDays,
+      'unlockedAt': unlockedAt?.toIso8601String(),
+    };
+  }
+
+  factory Achievement.fromMap(Map<String, dynamic> map) {
+    return Achievement(
+      id: map['id'],
+      title: map['title'],
+      description: map['description'],
+      requiredStreakDays: map['requiredStreakDays'],
+      unlockedAt: map['unlockedAt'] == null ? null : DateTime.parse(map['unlockedAt']),
+    );
+  }
 }
