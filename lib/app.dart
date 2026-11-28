@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'providers/theme_provider.dart';
 import 'screens/home_screen.dart';
 import 'themes/app_theme.dart';
 
@@ -8,11 +9,17 @@ class HabitTrackerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Habit Tracker',
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      home: const HomeScreen(),
+    return ListenableBuilder(
+      listenable: themeProvider,
+      builder: (context, _) {
+        return MaterialApp(
+          title: 'Habit Tracker',
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: themeProvider.themeMode,
+          home: const HomeScreen(),
+        );
+      },
     );
   }
 }
